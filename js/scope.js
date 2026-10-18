@@ -200,7 +200,7 @@
   function slide(st) {
     const s = sc(st.slide === 'leaf' ? 10 : 40);
     const body = st.slide === 'leaf' ? leafSlide(st, s) : cheekSlide(st, s);
-    return field(`<g class="specimen" data-drag="slide"><rect x="0" y="0" width="600" height="600" fill="transparent"/>${body}</g>` + graticule(st.rot, !st.bare));
+    return field(`<g class="specimen"${st.bare ? '' : ' data-drag="slide"'}><rect x="0" y="0" width="600" height="600" fill="transparent"/>${body}</g>` + graticule(st.rot, !st.bare));
   }
 
   /* ---------------- Part 3: a micrograph as printed on an exam page, with a ruler in millimetres ----------------

@@ -151,7 +151,8 @@
   /* Part 5: a click on the phone's screen focuses its camera where it lands, as a tap does on a real phone */
   svg.addEventListener('click', e => {
     if (mode !== 'phone') return;
-    const p = pt(e), P = S.PHONE;
+    const r = svg.getBoundingClientRect(), k = 600 / Math.min(r.width, r.height);   // the square picture, from its box on the page
+    const p = { x: (e.clientX - r.left) * k, y: (e.clientY - r.top) * k }, P = S.PHONE;
     if (Math.hypot(p.x - P.cx, p.y - P.cy) <= P.r) { V.phone = { focused: true, fx: p.x, fy: p.y }; phoneMsg = ''; }
     else if (!V.phone.focused) phoneMsg = 'Tap the cells, inside the circle of light on the phone’s screen.';
     render();
@@ -160,6 +161,7 @@
   function pt(e) { const p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY; const m = svg.getScreenCTM(); return m ? p.matrixTransform(m.inverse()) : { x: 0, y: 0 }; }
   let drag = null;
   svg.addEventListener('pointerdown', e => {
+    if (mode === 'phone') return;                              // a tap on the phone is a click, never a drag
     const t = e.target.closest ? e.target.closest('[data-drag]') : null; if (!t) return;
     drag = { kind: t.dataset.drag, p0: pt(e), st: JSON.parse(JSON.stringify(V)) };
     try { svg.setPointerCapture(e.pointerId); } catch (err) { }

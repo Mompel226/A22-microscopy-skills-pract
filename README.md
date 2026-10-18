@@ -2,7 +2,7 @@
 
 ![Part 1: the eyepiece graticule over a stage micrometer, with a lens four times larger](img/readme.jpg)
 
-**Live:** https://nlcsbiology.com/A22-microscopy-skills-pract/ (once it is published)
+**Live:** https://nlcsbiology.com/A22-microscopy-skills-pract/ (since 18 Oct 2026)
 
 **Where it sits:** a *practical*, listed under the IB toggle of the [Biology Hub](https://nlcsbiology.com/biology-hub/)
 (Foundations door), beside the starch and rocky shore practicals.

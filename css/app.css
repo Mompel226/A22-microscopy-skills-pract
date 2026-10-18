@@ -640,7 +640,7 @@ svg.view .vn{display:none}
 .vname .k{font-weight:700}
 .vname__g{fill:#151515}
 .vname__m{fill:#123E8C}
-.inset__t{font-size:15px;paint-order:stroke;stroke:#F6F4EC;stroke-width:4px;stroke-linejoin:round}
+.inset__t{font-size:14px;text-anchor:middle;paint-order:stroke;stroke:#F6F4EC;stroke-width:4px;stroke-linejoin:round}
 .inset__t.vn{font-size:22px}
 .grat .grat__name{font:600 15px var(--sans);text-anchor:end;paint-order:stroke;stroke:rgba(251,250,244,.9);stroke-width:4px;stroke-linejoin:round}
 .plab line{stroke:#3A3F4B;stroke-width:2}

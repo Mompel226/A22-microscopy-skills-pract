@@ -91,7 +91,7 @@
      it, so it's obvious"; "it's not clear that you can move the lens"). The lens shows 28 EPU, so the 0 line and the
      first exact match (17 EPU, at ×400 and at ×100) fit in it together, with room on both sides.
      Every text has a wide version (.vw) and a short one (.vn); the stylesheet shows the short one in a narrow picture. */
-  const LENS = { x: 30, y: 398, w: 540, h: 110, mag: 4 };
+  const LENS = { x: 30, y: 398, w: 540, h: 100, mag: 4 };   // its caption sits under it, in the bright part of the field
   LENS.sw = LENS.w / LENS.mag; LENS.sh = LENS.h / LENS.mag;
   LENS.min = G.x0 + LENS.sw / 2 - 30; LENS.max = G.x1 - LENS.sw / 2 + 30;   // the frame's middle stays near the scale
   function onZero(st) { const d = 10 * sc(st.obj), j = Math.round((G.x0 - st.x0) / d); return j >= 0 && j <= 100 && Math.abs(st.x0 + j * d - G.x0) < 0.02; }
@@ -124,8 +124,8 @@
     const lens = `<g class="lensmark" data-drag="lens"><rect x="${f2(fx - sw / 2)}" y="${f2(G.cy - sh / 2)}" width="${f2(sw)}" height="${f2(sh)}" rx="3"/></g>`;
     const inset = `<g class="inset" pointer-events="none"><rect x="${LX - 3}" y="${LY - 3}" width="${LW + 6}" height="${LH + 6}" rx="10" class="inset__frame"/>
       <svg x="${LX}" y="${LY}" width="${LW}" height="${LH}" viewBox="${f2(fx - sw / 2)} ${f2(G.cy - sh / 2)} ${f2(sw)} ${f2(sh)}"><rect x="-50" y="0" width="700" height="600" fill="#F6F4EC"/>${scales}</svg>
-      <text class="inset__t vw" x="${LX + 12}" y="${LY + LH - 10}">Lens ×${MAG}: what is inside the orange frame</text>
-      <text class="inset__t vn" x="${LX + 12}" y="${LY + LH - 10}">Lens ×${MAG}</text></g>`;
+      <text class="inset__t vw" x="300" y="${LY + LH + 25}">Lens ×${MAG}: what is inside the orange frame</text>
+      <text class="inset__t vn" x="300" y="${LY + LH + 29}">Lens ×${MAG}</text></g>`;   // under the lens, never over its divisions (Daniel, 18 Oct)
     return field(scales + lens + names, inset + (st.hint === false ? '' : calibHint(st)));   // hint: false for the deck's pictures
   }
 

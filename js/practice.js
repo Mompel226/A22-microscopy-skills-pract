@@ -80,11 +80,12 @@
   A.gset($('[data-gs="p4-rules"]'), {
     id: 'p4-rules', part: 4, title: 'Recall the rules for a drawing', short: 'Rules', labels: ['large', 'continuous', 'shading', 'ruler', 'touch', 'cross', 'see', 'graticule'],
     html: `<h3>Recall the rules</h3>
-      <p class="mrow"><b class="sold">S</b> Size: draw it ${gin('large', 6)}, so that it fills the space.</p>
-      <p class="mrow"><b class="sold">O</b> Outline: one clear, ${gin('cont', 10)} line for each edge, and no ${gin('shade', 8)}.</p>
-      <p class="mrow"><b class="sold">L</b> Labels: draw each label line with a ${gin('ruler', 7)}. Each line must ${gin('touch', 7)} the structure it labels, and no two lines may ${gin('cross', 6)}.</p>
-      <p class="mrow"><b class="sold">D</b> Detail: draw only what you can ${gin('see', 6)}.</p>
-      <p class="mrow"><b class="sold sc">+</b> Scale: give the real size with a scale bar, from the cell length you measured with the eyepiece ${gin('grat', 10)}.</p>`,
+      <p class="note">Each box shows the first letter of its word.</p>
+      <p class="mrow"><b class="sold">S</b> Size: draw it ${gin('large', 6, 0, 'l')}, so that it fills the space.</p>
+      <p class="mrow"><b class="sold">O</b> Outline: one clear, ${gin('cont', 10, 0, 'c')} line for each edge, and no ${gin('shade', 8, 0, 's')}.</p>
+      <p class="mrow"><b class="sold">L</b> Labels: draw each label line with a ${gin('ruler', 7, 0, 'r')}. Each line must ${gin('touch', 7, 0, 't')} the structure it labels, and no two lines may ${gin('cross', 6, 0, 'c')}.</p>
+      <p class="mrow"><b class="sold">D</b> Detail: draw only what you can ${gin('see', 6, 0, 's')}.</p>
+      <p class="mrow"><b class="sold sc">+</b> Scale: give the real size with a scale bar, from the cell length you measured with the eyepiece ${gin('grat', 10, 0, 'g')}.</p>`,
     gaps: {
       large: { ok: words('large', 'big', 'very large'), show: () => 'large' },
       cont: { ok: words('continuous', 'unbroken', 'single', 'solid', 'smooth'), show: () => 'continuous' },

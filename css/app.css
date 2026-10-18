@@ -662,3 +662,6 @@ svg.view .vn{display:none}
 .orange{color:#C2410C}
 @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .orange{color:#FB923C} }
 :root[data-theme="dark"] .orange{color:#FB923C}
+
+/* the first letter of a missing word, shown in its empty box (Recall the rules) */
+input.gapin::placeholder{color:var(--ink3);opacity:1;font-weight:600}

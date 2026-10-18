@@ -303,7 +303,9 @@
     }
   }
   /* an input for a set: data-g names it, size its width */
-  const gin = (g, size, dec) => `<input class="gapin" type="text" data-g="${g}" size="${size || 8}"${dec ? ' inputmode="decimal"' : ''} autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Type the missing ${dec ? 'number' : 'word'}">`;
+  // first: the word's first letter, shown in the empty box as a hint (Daniel, 18 Oct 2026: "it's very hard to choose the
+  // words … the first letter I think will be more than enough"); it goes as soon as the pupil types
+  const gin = (g, size, dec, first) => `<input class="gapin" type="text" data-g="${g}" size="${size || 8}"${dec ? ' inputmode="decimal"' : ''}${first ? ` placeholder="${first}…"` : ''} autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Type the missing ${dec ? 'number' : 'word'}${first ? `, starting with ${first}` : ''}">`;
 
   /* ---------------- the parts: one open at a time, as tabs along the top ---------------- */
   const NPART = $$('.part').length;

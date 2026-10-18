@@ -20,7 +20,8 @@ the top, with the picture on the left (up to 56 % of the width on a computer) sh
 3. **Scale bars.** A micrograph as printed on an exam page, with a ruler they drag: the scale bar and a Paramecium in mm,
    then magnification, actual size, and the scale bar for their own drawing. Then an electron micrograph and a units
    mistake.
-4. **Drawings.** The rules recalled from memory (SOLD: Size, Outline, Labels, Detail, and a scale), then three mistakes
+4. **Drawings.** The rules recalled from memory (SOLD: Size, Outline, Labels, Detail, and a scale; each box shows the first
+   letter of its word), then three mistakes
    typed for each of three drawings. Drawing D follows every rule.
 5. **The photo.** How to take a photo through the eyepiece with a phone (the eyepiece is labelled on the picture), and
    safety, with one quick check.

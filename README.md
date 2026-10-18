@@ -41,6 +41,8 @@ the teacher page's **🔬 Practicals** tab: one square per question for each stu
 finds hardest, and **● Live** during the lesson. It is not homework and not a mark. Signed out, the page works exactly the
 same and nothing leaves the browser.
 
+The `tools/` named here stay on Daniel's computer: they are not in this repository (since 18 Oct 2026).
+
 Behind it: `js/lesson.js` and `js/signin.js` are copies of `labs-shared/` (made by `tools/practicals-sync.mjs` in the
 workspace), `js/config.js` names this practical, and `data/questions.json` lists its questions for the board
 (`node tools/make-questions.mjs` writes it from the page; `--check` says when it is out of date). Keep a question's id

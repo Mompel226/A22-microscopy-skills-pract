@@ -607,6 +607,14 @@ svg.view.dragging,svg.view.dragging [data-drag]{cursor:grabbing}
 @media (min-width:1001px){
   .layout{grid-template-columns:min(50%, calc(100vh - var(--bar-h,56px) - 250px)) minmax(0,1fr)}
 }
+/* A bigger picture (Daniel, 18 Oct 2026: with the names and the steps on it, "everything looks a bit condensed … increase
+   the width of that left column … a little bit more breathing room"). On a computer the picture takes up to 56 % of the
+   width, and only the status line and the buttons need room under it: the caption under the picture goes, because the
+   picture now names its parts and the footer says every picture is drawn for the page (a phone already hid it). */
+@media (min-width:1001px){
+  .layout{grid-template-columns:min(56%, calc(100vh - var(--bar-h,56px) - 150px)) minmax(0,1fr)}
+  .stage figcaption{display:none}
+}
 
 /* ================= Names and steps on the pictures (Daniel, 18 Oct 2026: "label it, so it's obvious": students meet
    the graticule and the stage micrometer for the first time; "it's not clear that you can move the lens"). Each text in

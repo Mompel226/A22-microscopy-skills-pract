@@ -8,7 +8,7 @@
 (Foundations door), beside the starch and rocky shore practicals.
 
 About **15 minutes** of practice in four microscopy skills, set as homework or done in class. Five parts, as tabs along
-the top, with the picture on the left showing what each part is about:
+the top, with the picture on the left (up to 56 % of the width on a computer) showing what each part is about:
 
 1. **Calibrate the graticule.** Both scales are named on the picture, and the next step is written at its top. Students
    drag the stage micrometer until one of its lines sits on 0 of the eyepiece graticule, then drag an orange frame along

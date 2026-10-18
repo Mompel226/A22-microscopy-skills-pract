@@ -117,8 +117,8 @@
         <text class="vname__m" x="300" y="388"><tspan class="k">Stage micrometer</tspan></text></g></g>`;
   }
   function calib(st) {
-    const scales = graticule(0) + micrometer(st.obj, st.x0);
-    if (st.nolens) return field(scales);   // the deck's pictures of the first steps: the two scales only
+    const scales = graticule(0) + micrometer(st.obj, st.x0), names = st.names === false ? '' : calibNames();
+    if (st.nolens) return field(scales + names);   // the deck's pictures of the first steps: no lens
     const { x: LX, y: LY, w: LW, h: LH, mag: MAG, sw, sh } = LENS;
     const fx = Math.max(LENS.min, Math.min(LENS.max, st.lens));
     const lens = `<g class="lensmark" data-drag="lens"><rect x="${f2(fx - sw / 2)}" y="${f2(G.cy - sh / 2)}" width="${f2(sw)}" height="${f2(sh)}" rx="3"/></g>`;
@@ -126,7 +126,7 @@
       <svg x="${LX}" y="${LY}" width="${LW}" height="${LH}" viewBox="${f2(fx - sw / 2)} ${f2(G.cy - sh / 2)} ${f2(sw)} ${f2(sh)}"><rect x="-50" y="0" width="700" height="600" fill="#F6F4EC"/>${scales}</svg>
       <text class="inset__t vw" x="${LX + 12}" y="${LY + LH - 10}">Lens ×${MAG}: what is inside the orange frame</text>
       <text class="inset__t vn" x="${LX + 12}" y="${LY + LH - 10}">Lens ×${MAG}</text></g>`;
-    return field(scales + lens + calibNames(), inset + calibHint(st));
+    return field(scales + lens + names, inset + (st.hint === false ? '' : calibHint(st)));   // hint: false for the deck's pictures
   }
 
   /* ---------------- the slides: cheek cells (×400) and a leaf epidermis peel (×100) ---------------- */

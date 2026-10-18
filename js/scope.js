@@ -1,7 +1,7 @@
 /* A2.2.2 microscopy skills · scope.js — every picture on the left, drawn as SVG for this page (18 Oct 2026).
    The views down the microscope (the eyepiece graticule over a stage micrometer, cheek cells, a leaf epidermis peel), a
    micrograph as printed in an exam paper with a ruler, the practice drawings, and a phone at the eyepiece.
-   Never the specimens of the assessment (banana, duckweed), nor onion (the IGCSE assessment): memory never-do-the-assessment.
+   The specimens are human cheek cells and a leaf epidermis peel, and a Paramecium on the printed page.
 
    One microscope for the whole page: at ×400 (the ×40 objective), 17 eyepiece units (EPU) match 4 stage-micrometer
    divisions (4 × 10 µm), so 1 EPU = 40 ÷ 17 = 2.35 µm; at ×100 it is 4 times as much, 9.41 µm. Every size on the page
@@ -60,15 +60,17 @@
       <circle cx="300" cy="300" r="${G.r}" fill="none" stroke="#000" stroke-opacity=".55" stroke-width="5" pointer-events="none"/>${over || ''}`;
   }
 
-  /* the eyepiece graticule: 100 divisions, a long line every 10 with its number above */
-  function graticule(rot) {
+  /* the eyepiece graticule: 100 divisions, a long line every 10 with its number above. named: its name under the right
+     end of the line, turning with it (the slides of part 2; part 1 names both scales in calib) */
+  function graticule(rot, named) {
     let t = '', n = '';
     for (let i = 0; i <= 100; i++) {
       const x = G.x0 + i * U, L = i % 10 === 0 ? 20 : i % 5 === 0 ? 13 : 7;
       t += `<line x1="${f2(x)}" y1="${G.cy}" x2="${f2(x)}" y2="${G.cy - L}"/>`;
       if (i % 10 === 0) n += `<text x="${f2(x)}" y="${G.cy - 26}">${i}</text>`;
     }
-    return `<g class="grat" transform="rotate(${f2(rot || 0)} 300 300)" pointer-events="none"><line x1="${G.x0}" y1="${G.cy}" x2="${G.x1}" y2="${G.cy}"/>${t}${n}</g>`;
+    const name = named ? `<text class="grat__name" x="${G.x1}" y="${G.cy + 24}">eyepiece graticule</text>` : '';
+    return `<g class="grat" transform="rotate(${f2(rot || 0)} 300 300)" pointer-events="none"><line x1="${G.x0}" y1="${G.cy}" x2="${G.x1}" y2="${G.cy}"/>${t}${n}${name}</g>`;
   }
 
   /* the stage micrometer: 1 mm in 100 divisions of 10 µm, a number every 10 divisions (0.1 mm); x0 = its 0 line */
@@ -84,16 +86,47 @@
     return `<g class="mic" data-drag="mic"><rect class="mic__glass" x="-30" y="${G.cy + 3}" width="660" height="58"/>${xb > xa ? `<line x1="${f2(xa)}" y1="${G.cy + 4}" x2="${f2(xb)}" y2="${G.cy + 4}"/>` : ''}${t}${n}</g>`;
   }
 
-  /* Part 1: the graticule over the stage micrometer, with a lens that shows four times closer where it is placed */
+  /* Part 1: the graticule over the stage micrometer, with a lens that shows four times closer what is inside its orange
+     frame. Both scales are named on the picture, and the next step is written at its top (Daniel, 18 Oct 2026: "label
+     it, so it's obvious"; "it's not clear that you can move the lens"). The lens shows 28 EPU, so the 0 line and the
+     first exact match (17 EPU, at ×400 and at ×100) fit in it together, with room on both sides.
+     Every text has a wide version (.vw) and a short one (.vn); the stylesheet shows the short one in a narrow picture. */
+  const LENS = { x: 30, y: 398, w: 540, h: 110, mag: 4 };
+  LENS.sw = LENS.w / LENS.mag; LENS.sh = LENS.h / LENS.mag;
+  LENS.min = G.x0 + LENS.sw / 2 - 30; LENS.max = G.x1 - LENS.sw / 2 + 30;   // the frame's middle stays near the scale
+  function onZero(st) { const d = 10 * sc(st.obj), j = Math.round((G.x0 - st.x0) / d); return j >= 0 && j <= 100 && Math.abs(st.x0 + j * d - G.x0) < 0.02; }
+  const K = s => `<tspan class="k">${s}</tspan>`, BL = s => `<tspan class="kb">${s}</tspan>`, OR = s => `<tspan class="ko">${s}</tspan>`;
+  function hintBox(lines, cls, y0, w, lh) {
+    const hh = lines.length * lh + 18;
+    return `<g class="vhint ${cls}"><rect x="${f2(300 - w / 2)}" y="${y0}" width="${w}" height="${hh}" rx="14"/>` +
+      lines.map((l, i) => `<text x="300" y="${f2(y0 + 9 + lh * (i + 0.72))}">${l}</text>`).join('') + '</g>';
+  }
+  function calibHint(st) {
+    const A = !onZero(st);
+    const wide = A ? [`First, drag the ${BL('blue scale')} until one of its`, `lines sits exactly on 0 of the ${K('black scale')}.`]
+      : [`Next, drag the ${OR('orange frame')} along the scales.`, `Find where a ${K('black line')} and a ${BL('blue line')} meet`, 'exactly again (nearly is not enough).'];
+    const short = A ? [`First, drag the ${BL('blue scale')}`, 'until one of its lines sits', 'exactly on 0.']
+      : [`Next, drag the ${OR('orange frame')}.`, `Find a ${K('black')} and a ${BL('blue')} line`, 'that meet exactly again.'];
+    return `<g pointer-events="none">${hintBox(wide, 'vw', A ? 136 : 122, 436, 24)}${hintBox(short, 'vn', 98, 404, 31)}</g>`;
+  }
+  function calibNames() {
+    return `<g class="vname" pointer-events="none">
+      <g class="vw"><text class="vname__g" x="300" y="240"><tspan class="k">Eyepiece graticule</tspan> (in the eyepiece)</text>
+        <text class="vname__m" x="300" y="385"><tspan class="k">Stage micrometer</tspan> (on the stage) · 1 division = 10 µm</text></g>
+      <g class="vn"><text class="vname__g" x="300" y="241"><tspan class="k">Eyepiece graticule</tspan></text>
+        <text class="vname__m" x="300" y="388"><tspan class="k">Stage micrometer</tspan></text></g></g>`;
+  }
   function calib(st) {
     const scales = graticule(0) + micrometer(st.obj, st.x0);
-    const LW = 330, LH = 110, LX = 135, LY = 398, MAG = 4, sw = LW / MAG, sh = LH / MAG;
-    const fx = Math.max(G.x0 - 10, Math.min(G.x1 + 10, st.lens));
+    if (st.nolens) return field(scales);   // the deck's pictures of the first steps: the two scales only
+    const { x: LX, y: LY, w: LW, h: LH, mag: MAG, sw, sh } = LENS;
+    const fx = Math.max(LENS.min, Math.min(LENS.max, st.lens));
     const lens = `<g class="lensmark" data-drag="lens"><rect x="${f2(fx - sw / 2)}" y="${f2(G.cy - sh / 2)}" width="${f2(sw)}" height="${f2(sh)}" rx="3"/></g>`;
     const inset = `<g class="inset" pointer-events="none"><rect x="${LX - 3}" y="${LY - 3}" width="${LW + 6}" height="${LH + 6}" rx="10" class="inset__frame"/>
       <svg x="${LX}" y="${LY}" width="${LW}" height="${LH}" viewBox="${f2(fx - sw / 2)} ${f2(G.cy - sh / 2)} ${f2(sw)} ${f2(sh)}"><rect x="-50" y="0" width="700" height="600" fill="#F6F4EC"/>${scales}</svg>
-      <text class="inset__t" x="${LX + 10}" y="${LY + LH - 9}">Lens ×${MAG}</text></g>`;
-    return st.nolens ? field(scales) : field(scales + lens, inset);   // nolens: the deck's pictures of the first steps
+      <text class="inset__t vw" x="${LX + 12}" y="${LY + LH - 10}">Lens ×${MAG}: what is inside the orange frame</text>
+      <text class="inset__t vn" x="${LX + 12}" y="${LY + LH - 10}">Lens ×${MAG}</text></g>`;
+    return field(scales + lens + calibNames(), inset + calibHint(st));
   }
 
   /* ---------------- the slides: cheek cells (×400) and a leaf epidermis peel (×100) ---------------- */
@@ -167,7 +200,7 @@
   function slide(st) {
     const s = sc(st.slide === 'leaf' ? 10 : 40);
     const body = st.slide === 'leaf' ? leafSlide(st, s) : cheekSlide(st, s);
-    return field(`<g class="specimen" data-drag="slide"><rect x="0" y="0" width="600" height="600" fill="transparent"/>${body}</g>` + graticule(st.rot));
+    return field(`<g class="specimen" data-drag="slide"><rect x="0" y="0" width="600" height="600" fill="transparent"/>${body}</g>` + graticule(st.rot, !st.bare));
   }
 
   /* ---------------- Part 3: a micrograph as printed on an exam page, with a ruler in millimetres ----------------
@@ -318,14 +351,15 @@
 
   /* ---------------- Part 5: the phone held at the eyepiece ---------------- */
   function phone() {
-    const inner = slide({ slide: 'cheek', dx: 30, dy: 10, rot: 0 }).replace('<rect width="600" height="600" fill="#0E1015"/>', '<rect width="600" height="600" fill="#05060A"/>');
+    const inner = slide({ slide: 'cheek', dx: 30, dy: 10, rot: 0, bare: true }).replace('<rect width="600" height="600" fill="#0E1015"/>', '<rect width="600" height="600" fill="#05060A"/>');
     return `<rect width="600" height="600" class="desk"/>
       <circle cx="300" cy="318" r="196" class="eyepiece"/><circle cx="300" cy="318" r="170" class="eyepiece__in"/>
       <rect x="150" y="40" width="300" height="540" rx="38" class="phone"/><rect x="164" y="80" width="272" height="440" rx="12" fill="#05060A"/>
       <svg x="164" y="150" width="272" height="272" viewBox="0 0 600 600">${inner}</svg>
       <circle cx="300" cy="286" r="34" class="focus"/><text class="phone__t" x="300" y="470">Tap the cells to focus</text>
-      <circle cx="300" cy="60" r="5" class="phone__cam"/>`;
+      <circle cx="300" cy="60" r="5" class="phone__cam"/>
+      <g class="plab"><line x1="88" y1="318" x2="118" y2="318"/><text x="84" y="324">eyepiece</text></g>`;
   }
 
-  window.Scope = { EPU, G, U, sc, calib, slide, card, DRAW, phone, cells: cells.map(c => ({ k: c.k, len: c.len, S: c.S })), PARA, MM, LEAF };
+  window.Scope = { EPU, G, U, sc, LENS, onZero, calib, slide, card, DRAW, phone, cells: cells.map(c => ({ k: c.k, len: c.len, S: c.S })), PARA, MM, LEAF };
 })();

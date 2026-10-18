@@ -1,19 +1,20 @@
 # Microscopy skills — IB Biology (A2.2.2)
 
-![Part 1: the eyepiece graticule over a stage micrometer, with a lens four times larger](img/readme.jpg)
+![Part 1: the eyepiece graticule and the stage micrometer, named on the picture, with the next step at its top and a lens four times larger](img/readme.jpg)
 
 **Live:** https://nlcsbiology.com/A22-microscopy-skills-pract/ (since 18 Oct 2026)
 
 **Where it sits:** a *practical*, listed under the IB toggle of the [Biology Hub](https://nlcsbiology.com/biology-hub/)
 (Foundations door), beside the starch and rocky shore practicals.
 
-About **15 minutes** of practice before the A2.2 microscopy assessment, done in class on top of a normal lesson. Five
-parts, as tabs along the top, with the picture on the left showing what each part is about:
+About **15 minutes** of practice in four microscopy skills, set as homework or done in class. Five parts, as tabs along
+the top, with the picture on the left showing what each part is about:
 
-1. **Calibrate the graticule.** Students drag the stage micrometer until one of its lines sits on 0 of the eyepiece
-   graticule, look along both scales with a lens that shows a place four times larger, find where the lines meet
-   exactly again, and calculate one eyepiece unit (EPU) in µm. Then: the value at ×100, and why each objective needs its
-   own calibration.
+1. **Calibrate the graticule.** Both scales are named on the picture, and the next step is written at its top. Students
+   drag the stage micrometer until one of its lines sits on 0 of the eyepiece graticule, then drag an orange frame along
+   the scales: a lens shows what is inside it four times larger (28 EPU, so the 0 line and the first exact match fit in
+   it together). They find where the lines meet exactly again and calculate one eyepiece unit (EPU) in µm. Then: the
+   value at ×100, and why each objective needs its own calibration. A note says why a normal ruler cannot do the job.
 2. **Measure cells.** Three cheek cells (A, B, C) at ×400: move the slide, turn the eyepiece along each cell's longest
    axis, count EPU, change to µm, calculate the mean. Then a cell at an angle, and the mean of a row of leaf cells.
 3. **Scale bars.** A micrograph as printed on an exam page, with a ruler they drag: the scale bar and a Paramecium in mm,
@@ -21,18 +22,17 @@ parts, as tabs along the top, with the picture on the left showing what each par
    mistake.
 4. **Drawings.** The rules recalled from memory (SOLD: Size, Outline, Labels, Detail, and a scale), then three mistakes
    typed for each of three drawings. Drawing D follows every rule.
-5. **The photo and the marks.** How to take the photo through the eyepiece, what the assessed work is marked on (15
-   marks: the drawing, the photo and technique, two exam questions) and safety, in a separate panel with no questions.
+5. **The photo.** How to take a photo through the eyepiece with a phone (the eyepiece is labelled on the picture), and
+   safety, with one quick check.
 
-**What it never shows (memory: never do the assessment):** the assessment's specimens (banana and duckweed), its two exam
-questions or any of their numbers; nor onion, the IGCSE assessment. The practice specimens are human cheek cells (no
-longer done in the school lab, for health and safety) and a leaf epidermis peel with guard cells (done in Year 8 and
-Year 11). The drawing rules and the headings of the mark scheme are given, never a drawing of the assessed specimen.
+The practice specimens are human cheek cells (no longer done in the school lab, for health and safety) and a leaf
+epidermis peel with guard cells (done in Year 8 and Year 11).
 
-Every word and number is typed, never chosen from a list; multiple choice is drawn in a new order each time; the answers
-appear only after two tries; every answer survives a reload. IB Biology guide (first assessment 2025): A2.2.2; Tool 1 (a
-light microscope and eyepiece graticule) and Tool 3 (actual size from a micrograph with a scale bar). Textbook: Allott and
-Mindorff, Oxford IB Biology Course Companion (2023), pp. 50–55.
+Keywords are tinted and bold: press one and its meaning opens under the line. Every word and number is typed, never
+chosen from a list; multiple choice is drawn in a new order each time; the answers appear only after two tries; every
+answer survives a reload. IB Biology guide (2025): A2.2.2; Tool 1 (a light microscope and eyepiece graticule) and Tool 3
+(actual size from a micrograph with a scale bar). Textbook: Allott and Mindorff, Oxford IB Biology Course Companion
+(2023), pp. 50–55.
 
 ## For the teacher: how each student is doing
 A student who signs in with their school Google account (the line under the title; the same sign-in as the Biology Hub)

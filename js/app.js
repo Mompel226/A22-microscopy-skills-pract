@@ -32,7 +32,7 @@
               restart: (...a) => { L0.restart(...a); ans.drop(a[0]); progressSoon(); }, restartAll: (...a) => { L0.restartAll(...a); progressSoon(); } };
   const QREG = [];
   const reg = q => { if (!QREG.some(x => x.id === q.id)) QREG.push(q); };
-  const PARTS = [[1, 'Calibrate the graticule'], [2, 'Measure cells'], [3, 'Scale bars'], [4, 'Drawings'], [5, 'Your photo and marks']];
+  const PARTS = [[1, 'Calibrate the graticule'], [2, 'Measure cells'], [3, 'Scale bars'], [4, 'Drawings'], [5, 'Take a photo']];
   function manifest() {
     const qs = QREG.map((q, i) => [q, i]).sort((a, b) => a[0].part - b[0].part || a[1] - b[1]).map(x => x[0]);
     const used = new Set(qs.map(q => q.part));
@@ -72,13 +72,17 @@
 
   /* ---------------- words that open their meaning in place ---------------- */
   const DEF = {
-    graticule: ['eyepiece graticule', 'A scale of 100 equal divisions on a glass disc inside the eyepiece. Its divisions have no unit until you calibrate it with a stage micrometer.'],
-    micrometer: ['stage micrometer', 'A slide with a scale of known length on it. Here it is 1 mm long, divided into 100 divisions, so one division is 0.01 mm = 10 µm.'],
+    eyepiece: ['eyepiece', 'The lens you look through, at the top of the microscope. It usually magnifies ×10. The eyepiece graticule sits inside it.'],
+    stage: ['stage', 'The flat platform under the objective lens. The slide sits on it, and the stage controls move the slide.'],
+    graticule: ['eyepiece graticule', 'A scale of 100 equal divisions on a small glass disc inside the eyepiece. You see it on top of the specimen, and it stays the same size at every magnification. Its divisions have no unit until you calibrate it with a stage micrometer.'],
+    micrometer: ['stage micrometer', 'A special glass slide with a very small, exact scale on it, which you put on the stage. Here the scale is 1 mm long, in 100 divisions, so one division is 0.01 mm = 10 µm. A normal ruler cannot do this job: its smallest marks are 1 mm apart, and at ×400 the whole circle you see is less than half a millimetre across.'],
     epu: ['eyepiece unit (EPU)', 'One division of the eyepiece graticule. Its real length on the slide depends on the objective lens in use.'],
     calibrate: ['calibrate', 'To find the real length that one eyepiece unit represents, in µm, by comparing the graticule with the stage micrometer.'],
     objective: ['objective lens', 'The lens close to the slide (×4, ×10 or ×40). Total magnification = eyepiece lens (×10) × objective lens.'],
     magnification: ['magnification', 'How many times larger the image is than the real object. Magnification = image size ÷ actual size, both in the same unit.'],
     actual: ['actual size', 'The real size of the specimen. Actual size = image size ÷ magnification.'],
+    mean: ['mean', 'The average: add the values together, then divide by the number of values.'],
+    image: ['image size', 'The size of the specimen in the micrograph or the drawing, measured with a ruler.'],
     scalebar: ['scale bar', 'A straight line on a drawing or micrograph with the real length it represents written beside it, for example 20 µm.'],
     micrometre: ['micrometre (µm)', 'One thousandth of a millimetre. 1 mm = 1000 µm, and 1 µm = 1000 nm.'],
     uncertainty: ['uncertainty', 'The range in which the true value probably lies. You read each end of a length to the nearest division, so a length has an uncertainty of about ± 1 division.'],
@@ -101,7 +105,7 @@
 
   /* ---------------- the picture on the left ---------------- */
   const V = {
-    calib: Object.assign({ obj: 40, x0: 101.7, lens: 60 }, store.get('v.calib', {})),
+    calib: Object.assign({ obj: 40, x0: 101.7, lens: 101 }, store.get('v.calib', {})),
     slide: Object.assign({ slide: 'cheek', dx: 0, dy: 0, rot: 0 }, store.get('v.slide', {})),
     card: Object.assign({ rx: 64, ry: 506, rot: 0 }, store.get('v.card', {})),
     draw: Object.assign({ d: 'A' }, store.get('v.draw', {}))
@@ -109,13 +113,13 @@
   const svg = $('#view'), stat = $('#vstat');
   let mode = 'calib';
   const CAP = {
-    calib: 'The view down the microscope at ×400: the eyepiece graticule (black, numbers above) and the stage micrometer (blue, numbers below; each number is 0.1 mm). The lens shows the frame four times closer. Drawn for this page.',
+    calib: 'The view down the microscope at ×400: the eyepiece graticule (black, numbers above) and the stage micrometer (blue, numbers below; each number is 0.1 mm). The lens shows what is inside the orange frame, four times larger. Drawn for this page.',
     slide: 'Human cheek cells stained with methylene blue (×400), or a leaf epidermis peel (×100), with the eyepiece graticule. Drawn for this page at the real sizes of these cells.',
     card: 'A micrograph as printed on an exam page, with a ruler in millimetres. Drawn for this page: a Paramecium, a single-celled organism.',
     draw: 'Drawings made for this page. A, B and C each break three rules; D follows every rule.',
     phone: 'Taking a photo through the eyepiece with a phone.'
   };
-  const LABEL = { calib: 'The eyepiece graticule over the stage micrometer, with a lens four times closer', slide: 'A slide under the microscope with the eyepiece graticule', card: 'A printed micrograph of a Paramecium with a scale bar and a ruler', draw: 'A student drawing', phone: 'A phone held to the eyepiece of a microscope' };
+  const LABEL = { calib: 'The eyepiece graticule over the stage micrometer, with a lens that shows the orange frame four times larger', slide: 'A slide under the microscope with the eyepiece graticule', card: 'A printed micrograph of a Paramecium with a scale bar and a ruler', draw: 'A student drawing', phone: 'A phone held to the eyepiece of a microscope' };
   const d10 = () => 10 * S.sc(V.calib.obj);                    // svg units per micrometer division
   function lined() { const d = d10(), j = Math.round((S.G.x0 - V.calib.x0) / d); return { j, off: V.calib.x0 + j * d - S.G.x0 }; }
   function render() {
@@ -128,8 +132,8 @@
     $$('.ctl').forEach(c => { c.hidden = c.dataset.for !== mode; });
     $$('[data-set]').forEach(b => { const [k, v] = b.dataset.set.split(':'); const st = { obj: V.calib, slide: V.slide, d: V.draw }[k]; if (st) b.setAttribute('aria-pressed', String(String(st[k]) === v)); });
     if (mode === 'calib') {
-      const l = lined(), ok = Math.abs(l.off) < 0.02;
-      stat.innerHTML = `Objective ×${V.calib.obj} (×${V.calib.obj * 10} in total). ` + (ok ? `<span class="ok">✓ A line of the stage micrometer sits exactly on 0 of the graticule.</span>` : 'Drag the blue scale, or use the arrows, until one of its lines sits exactly on 0 of the graticule.');
+      const ok = S.onZero(V.calib);
+      stat.innerHTML = `Objective ×${V.calib.obj} (×${V.calib.obj * 10} in total). ` + (ok ? `<span class="ok">✓ A line of the stage micrometer sits exactly on 0 of the graticule.</span> Now drag the orange frame along the scales, or use the Lens arrows.` : 'Drag the blue scale, or use the Stage micrometer arrows, until one of its lines sits exactly on 0 of the graticule.');
     } else if (mode === 'slide') {
       stat.innerHTML = V.slide.slide === 'leaf' ? 'Leaf epidermis peel at ×100 (1 EPU = 9.41 µm).' : 'Cheek cells at ×400 (1 EPU = 2.35 µm).';
       stat.innerHTML += ` The eyepiece is turned ${Math.round(((V.slide.rot % 360) + 360) % 360)}°. Drag the slide to move a cell onto the scale.`;
@@ -154,7 +158,7 @@
     if (!drag) return;
     const p = pt(e), dx = p.x - drag.p0.x, dy = p.y - drag.p0.y;
     if (drag.kind === 'mic') V.calib.x0 = clamp(drag.st.calib.x0 + dx, S.G.x0 - 100 * d10() + 30, 560);
-    else if (drag.kind === 'lens') V.calib.lens = clamp(drag.st.calib.lens + dx, S.G.x0 - 10, S.G.x1 + 10);
+    else if (drag.kind === 'lens') V.calib.lens = clamp(clamp(drag.st.calib.lens, S.LENS.min, S.LENS.max) + dx, S.LENS.min, S.LENS.max);
     else if (drag.kind === 'slide') { const s = S.sc(V.slide.slide === 'leaf' ? 10 : 40), lim = V.slide.slide === 'leaf' ? 400 : 160; V.slide.dx = clamp(drag.st.slide.dx + dx / s, -lim, lim); V.slide.dy = clamp(drag.st.slide.dy + dy / s, -lim, lim); }
     else if (drag.kind === 'ruler') { V.card.rx = clamp(drag.st.card.rx + dx, -300, 580); V.card.ry = clamp(drag.st.card.ry + dy, -60, 600); }
     render();
@@ -173,7 +177,7 @@
     const a = b.dataset.act;
     if (a === 'mic') { V.calib.x0 += Number(b.dataset.by) * d10(); snapMic(); }
     if (a === 'micf') { V.calib.x0 += Number(b.dataset.by) * S.U * 0.25; }
-    if (a === 'lens') V.calib.lens = clamp(V.calib.lens + Number(b.dataset.by) * S.U * 5, S.G.x0 - 10, S.G.x1 + 10);
+    if (a === 'lens') V.calib.lens = clamp(clamp(V.calib.lens, S.LENS.min, S.LENS.max) + Number(b.dataset.by) * S.U * 5, S.LENS.min, S.LENS.max);
     if (a === 'move') { const s = V.slide.slide === 'leaf' ? 20 : 5; V.slide.dx += Number(b.dataset.x || 0) * s; V.slide.dy += Number(b.dataset.y || 0) * s; }
     if (a === 'turn') V.slide.rot = (V.slide.rot + Number(b.dataset.by)) % 360;
     if (a === 'turn0') V.slide.rot = 0;

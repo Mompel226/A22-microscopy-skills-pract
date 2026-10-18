@@ -1,6 +1,6 @@
 /* A2.2.2 microscopy skills · the questions (18 Oct 2026): the typed sets of each part and the quick checks.
    Board ids: p<part>-<name>, kept when a question is reworded (a new id moves its pupils' records to a new square).
-   None of these numbers, specimens or micrographs is the assessed task's (banana, duckweed, its two exam questions). */
+   The specimens, numbers and micrographs are made for this page. */
 (function () {
   'use strict';
   const A = window.MicroApp, $ = (s, el) => (el || document).querySelector(s), $$ = (s, el) => Array.from((el || document).querySelectorAll(s));
@@ -78,25 +78,24 @@
 
   /* ---------- part 4: the rules, then three drawings ---------- */
   A.gset($('[data-gs="p4-rules"]'), {
-    id: 'p4-rules', part: 4, title: 'Recall the rules for a drawing', short: 'Rules', labels: ['half', 'continuous', 'shading', 'ruler', 'touch', 'cross', 'four', 'see', 'graticule'],
+    id: 'p4-rules', part: 4, title: 'Recall the rules for a drawing', short: 'Rules', labels: ['large', 'continuous', 'shading', 'ruler', 'touch', 'cross', 'see', 'graticule'],
     html: `<h3>Recall the rules</h3>
-      <p class="mrow"><b class="sold">S</b> Size: draw large. The drawing uses more than ${gin('half', 6)} of the space.</p>
+      <p class="mrow"><b class="sold">S</b> Size: draw it ${gin('large', 6)}, so that it fills the space.</p>
       <p class="mrow"><b class="sold">O</b> Outline: one clear, ${gin('cont', 10)} line for each edge, and no ${gin('shade', 8)}.</p>
-      <p class="mrow"><b class="sold">L</b> Labels: draw each label line with a ${gin('ruler', 7)}. Each line must ${gin('touch', 7)} the structure it labels, and no two lines may ${gin('cross', 6)}. Label at least ${gin('four', 5)} structures.</p>
+      <p class="mrow"><b class="sold">L</b> Labels: draw each label line with a ${gin('ruler', 7)}. Each line must ${gin('touch', 7)} the structure it labels, and no two lines may ${gin('cross', 6)}.</p>
       <p class="mrow"><b class="sold">D</b> Detail: draw only what you can ${gin('see', 6)}.</p>
       <p class="mrow"><b class="sold sc">+</b> Scale: give the real size with a scale bar, from the cell length you measured with the eyepiece ${gin('grat', 10)}.</p>`,
     gaps: {
-      half: { ok: words('half', 'a half', 'one half', '50%', '50 %', '50 percent', 'fifty percent'), show: () => 'half' },
+      large: { ok: words('large', 'big', 'very large'), show: () => 'large' },
       cont: { ok: words('continuous', 'unbroken', 'single', 'solid', 'smooth'), show: () => 'continuous' },
       shade: { ok: words('shading', 'shade', 'shadings'), show: () => 'shading' },
       ruler: { ok: words('ruler', 'rule', 'straight edge'), show: () => 'ruler' },
       touch: { ok: words('touch', 'touches', 'reach', 'meet'), show: () => 'touch' },
       cross: { ok: words('cross', 'cross each other', 'overlap', 'intersect'), show: () => 'cross' },
-      four: { ok: words('four', '4'), show: () => 'four' },
       see: { ok: words('see', 'observe', 'see down the microscope', 'see clearly'), show: () => 'see' },
       grat: { ok: words('graticule', 'eyepiece graticule', 'graticle', 'reticule'), show: () => 'graticule' }
     },
-    after: 'These are the rules your drawing is marked on.'
+    after: 'These rules make a drawing clear, accurate and easy to read.'
   });
   const F = {
     shading: { re: [/shad|hatch|colou?r(ed)? in|filled in|darkened/], show: 'shading' },
@@ -153,12 +152,12 @@
           'The scale bar must be measured in centimetres, so the magnification is 2.5 ÷ 10 = ×0.25, which is smaller again.'],
       why: 'Use the same unit for both lengths: 25 mm × 1000 = 25 000 µm, and 25 000 ÷ 10 = ×2500. A magnification below ×1 would mean the image is smaller than the object.' },
     'p5-qc-1': { part: 5, short: 'q1', title: 'A photo with no scale in it', kind: 'mcq', c: 0,
-      q: 'Your photo shows sharp cells, but no part of the graticule scale. What can your teacher not check from this photo?',
-      a: ['Your measurement of the cell’s size, because nothing in the photo shows the scale you used.',
-          'Your choice of cell, because a photo cannot show which of the cells on the slide you chose to draw.',
-          'Your staining, because the colour of a stain always changes when a phone takes a photo of it.',
-          'The labels of your drawing, because the structures in a photo have no names written beside them.'],
-      why: 'With the graticule in the photo, your teacher can count the eyepiece units across the cell and check the size you give.' }
+      q: 'Your photo shows sharp cells, but no part of the graticule scale. What can nobody check from this photo?',
+      a: ['The size you measured for the cell, because nothing in the photo shows the scale you used.',
+          'The colour of the cells, because a phone cannot show the colours seen through an eyepiece.',
+          'The shape of the cells, because a photo taken through an eyepiece always distorts it.',
+          'Whether the cells are in focus, because a photo is always sharper than the view by eye.'],
+      why: 'With the graticule in the photo, anyone can count the eyepiece units across the cell and check the size you give.' }
   };
   $$('[data-qc]').forEach(b => { const q = QC[b.dataset.qc]; if (q) A.quick(b, Object.assign({ id: b.dataset.qc }, q)); });
 

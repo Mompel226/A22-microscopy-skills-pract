@@ -20,7 +20,7 @@
   },
   {
    "n": 5,
-   "title": "Your photo and marks"
+   "title": "Take a photo"
   }
  ],
  "groups": [],
@@ -144,13 +144,12 @@
    "short": "Rules",
    "kind": "gaps",
    "gaps": [
-    "half",
+    "large",
     "continuous",
     "shading",
     "ruler",
     "touch",
     "cross",
-    "four",
     "see",
     "graticule"
    ]
@@ -198,10 +197,10 @@
    "short": "q1",
    "kind": "mcq",
    "opts": [
-    "Your measurement of the cell’s size, because nothing in the photo shows the scale you used.",
-    "Your choice of cell, because a photo cannot show which of the cells on the slide you chose to draw.",
-    "Your staining, because the colour of a stain always changes when a phone takes a photo of it.",
-    "The labels of your drawing, because the structures in a photo have no names written beside them."
+    "The size you measured for the cell, because nothing in the photo shows the scale you used.",
+    "The colour of the cells, because a phone cannot show the colours seen through an eyepiece.",
+    "The shape of the cells, because a photo taken through an eyepiece always distorts it.",
+    "Whether the cells are in focus, because a photo is always sharper than the view by eye."
    ]
   }
  ]

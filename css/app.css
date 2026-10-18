@@ -529,7 +529,7 @@ svg.view.dragging,svg.view.dragging [data-drag]{cursor:grabbing}
 .mic line{stroke:#123E8C;stroke-width:1.6}
 .mic text{font:600 12px var(--mono);fill:#123E8C;text-anchor:middle}
 .mic__glass{fill:rgba(70,110,190,.07)}
-.lensmark rect{fill:rgba(255,255,255,.01);stroke:#C2410C;stroke-width:1.8;stroke-dasharray:5 3}
+.lensmark rect{fill:rgba(194,65,12,.07);stroke:#C2410C;stroke-width:2.2;stroke-dasharray:6 3}
 .lensmark{cursor:ew-resize!important}
 .inset__frame{fill:#F6F4EC;stroke:#C2410C;stroke-width:2.5}
 .inset__t{font:700 12px var(--sans);fill:#C2410C}
@@ -592,3 +592,65 @@ svg.view.dragging,svg.view.dragging [data-drag]{cursor:grabbing}
   .ctl__k{font-size:10.5px}
   .ctl button{min-width:30px;min-height:28px;padding:4px 7px;font-size:12px}
 }
+
+/* ================= One set of edges for the whole page (Daniel, 18 Oct 2026: "align things … centre everything … take
+   advantage of the whole width"). The header, Start here, the tab bar and the two columns share one width and one 22 px
+   gutter, so their left and right edges line up: the Word bank button no longer pushes the tabs off the line, and Start
+   here spans the full width. The page is wider on a big screen; the square view is never taller than the screen leaves
+   room for (so its buttons stay in sight), and the panel takes the rest of the width. ================= */
+:root{--page-w:1640px}
+.top{max-width:var(--page-w)}
+.layout{max-width:var(--page-w)}
+.partbar{padding-inline:max(0px, calc((100% - var(--page-w)) / 2))}
+.partbar .tabs{max-width:none;margin:0}
+.startbox{max-width:none}
+@media (min-width:1001px){
+  .layout{grid-template-columns:min(50%, calc(100vh - var(--bar-h,56px) - 250px)) minmax(0,1fr)}
+}
+
+/* ================= Names and steps on the pictures (Daniel, 18 Oct 2026: "label it, so it's obvious": students meet
+   the graticule and the stage micrometer for the first time; "it's not clear that you can move the lens"). Each text in
+   the picture has a wide version (.vw) and a short, larger one (.vn); the short one shows when the picture itself is
+   narrow (a phone, or a small laptop screen), so the words stay readable. ================= */
+.view-wrap{container-type:inline-size}
+svg.view .vn{display:none}
+@container (max-width:480px){
+  svg.view .vw{display:none}
+  svg.view .vn{display:inline}
+  .grat text{font-size:17px}
+  .mic text{font-size:16px}
+  .grat .grat__name{font-size:21px}
+}
+.vhint rect{fill:rgba(255,255,255,.9);stroke:rgba(20,30,60,.22);stroke-width:1.2}
+.vhint text{font:500 16.5px var(--sans);fill:#1B2233;text-anchor:middle}
+.vhint.vn text{font-size:24px}
+.vhint .k{font-weight:700;fill:#111}
+.vhint .kb{font-weight:700;fill:#123E8C}
+.vhint .ko{font-weight:700;fill:#C2410C}
+.vname text{font:400 16px var(--sans);text-anchor:middle;paint-order:stroke;stroke:#FBFAF4;stroke-width:5px;stroke-linejoin:round}
+.vname .vn text{font-size:23px}
+.vname .k{font-weight:700}
+.vname__g{fill:#151515}
+.vname__m{fill:#123E8C}
+.inset__t{font-size:15px;paint-order:stroke;stroke:#F6F4EC;stroke-width:4px;stroke-linejoin:round}
+.inset__t.vn{font-size:22px}
+.grat .grat__name{font:600 15px var(--sans);text-anchor:end;paint-order:stroke;stroke:rgba(251,250,244,.9);stroke-width:4px;stroke-linejoin:round}
+.plab line{stroke:#3A3F4B;stroke-width:2}
+.plab text{font:600 18px var(--sans);fill:var(--ink);text-anchor:end}
+@media (max-width:520px){
+  body.photo-on .stage{margin:0 -12px;padding-left:12px;padding-right:12px}
+  .top{padding-left:12px;padding-right:12px}
+  footer{padding-left:12px;padding-right:12px}
+}
+
+/* ================= Keywords stand out (Daniel, 18 Oct 2026: "make sure to highlight keywords"). A keyword is tinted
+   and bold; press it and its meaning opens under the line. ================= */
+.term{font-weight:650;color:var(--sea-ink);background:var(--sea-soft);border-radius:4px;padding:0 2px;margin:0;border-bottom:2px dotted var(--sea);box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.term:hover,.term:focus-visible{background:var(--sea);color:#fff;border-bottom-color:transparent}
+.term[aria-expanded="true"]{background:var(--sea);color:#fff}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .term:hover,:root:not([data-theme="light"]) .term:focus-visible,:root:not([data-theme="light"]) .term[aria-expanded="true"]{color:#0B1530} }
+:root[data-theme="dark"] .term:hover,:root[data-theme="dark"] .term:focus-visible,:root[data-theme="dark"] .term[aria-expanded="true"]{color:#0B1530}
+
+.orange{color:#C2410C}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .orange{color:#FB923C} }
+:root[data-theme="dark"] .orange{color:#FB923C}

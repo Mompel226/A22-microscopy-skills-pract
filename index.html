@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,600;1,400&display=swap">
-<link rel="stylesheet" href="css/app.css?v=1">
+<link rel="stylesheet" href="css/app.css?v=3">
 <!-- Bright or dark: the reader's choice for the whole site (biology.theme), else the computer's setting. -->
 <script>(function () { try { var t = localStorage.getItem('biology.theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {} })();</script>
 </head>
@@ -19,10 +19,10 @@
   <div class="lessonbar" id="lessonBar" hidden></div>
   <div class="eyebrow">IB Biology · A2.2.2 Microscopy skills</div>
   <h1>Microscopy skills: graticule, size and drawing</h1>
-  <p class="by">Practise the skills of your microscopy assessment on two other specimens · <a class="by-me" href="https://github.com/Mompel226" target="_blank" rel="noopener">Dr Daniel Mompel Riera</a></p>
+  <p class="by">Four skills for every microscope you use: calibrate, measure, calculate and draw · <a class="by-me" href="https://github.com/Mompel226" target="_blank" rel="noopener">Dr Daniel Mompel Riera</a></p>
   <div class="startbox">
     <p class="startbox__k">Start here · about 15 minutes</p>
-    <p>You practise the four skills of the microscopy assessment, one part each: <b>calibrate</b> the eyepiece graticule with a stage micrometer, <b>measure</b> cells with it, <b>calculate</b> magnification and actual size from a scale bar, and <b>check</b> a drawing against the rules. Part 5 says how your photo and your work are marked. The specimens here are human cheek cells and a leaf epidermis peel; in your practical lesson you use your own.</p>
+    <p>Four skills you need whenever you use a microscope, one part each: <b>calibrate</b> the <button class="term" data-t="graticule">eyepiece graticule</button> with a <button class="term" data-t="micrometer">stage micrometer</button>, <b>measure</b> cells with it, <b>calculate</b> <button class="term" data-t="magnification">magnification</button> and <button class="term" data-t="actual">actual size</button> from a <button class="term" data-t="scalebar">scale bar</button>, and <b>check</b> a drawing against the rules. Part 5 shows how to take a photo through the eyepiece. The specimens here are human cheek cells and a leaf epidermis peel.</p>
     <p class="keyrow"><span class="kk kr">★ Key rule</span><span class="kk do">✓ Do</span><span class="kk dont">✗ Don't</span><span class="kk qk">Quick check</span></p>
   </div>
 </div>
@@ -33,7 +33,7 @@
     <button role="tab" id="tab-2" aria-controls="part-2" aria-selected="false"><span class="n">2</span>Measure cells</button>
     <button role="tab" id="tab-3" aria-controls="part-3" aria-selected="false"><span class="n">3</span>Scale bars</button>
     <button role="tab" id="tab-4" aria-controls="part-4" aria-selected="false"><span class="n">4</span>Drawings</button>
-    <button role="tab" id="tab-5" aria-controls="part-5" aria-selected="false"><span class="n">5</span>Photo and marks</button>
+    <button role="tab" id="tab-5" aria-controls="part-5" aria-selected="false"><span class="n">5</span>Photo</button>
   </div>
   <button class="wbbtn" id="wbBtn" type="button" aria-expanded="false" aria-controls="wb">Word bank</button>
 </nav>
@@ -76,18 +76,19 @@
     <!-- 1 ------------------------------------------------------------------ -->
     <section class="part open" id="part-1" role="tabpanel" aria-labelledby="tab-1" data-mode="calib" data-pin>
       <h2>Calibrate the eyepiece graticule</h2>
-      <p class="sub">About 4 minutes. The scale you see in the eyepiece has no unit. You calibrate it with a stage micrometer: a slide with a scale of known length.</p>
-      <div class="task"><div><span class="task__k">Your task</span><p>Align a blue line with 0 of the black scale. Find where the lines meet exactly again, then calculate what one eyepiece unit is in µm.</p></div><span class="task__n" aria-live="polite"></span></div>
+      <p class="sub">About 4 minutes. The scale you see in the <button class="term" data-t="eyepiece">eyepiece</button> has no unit. You <button class="term" data-t="calibrate">calibrate</button> it with a <button class="term" data-t="micrometer">stage micrometer</button>: a special slide with a scale of known length.</p>
+      <div class="task"><div><span class="task__k">Your task</span><p>Align a blue line with 0 of the black scale. Drag the orange frame to find where the lines meet exactly again, then calculate what one eyepiece unit is in µm.</p></div><span class="task__n" aria-live="polite"></span></div>
       <div class="ins">
         <p class="kr"><b>★ Key rule</b> Calibrate the graticule for each objective lens you use.</p>
         <p class="do"><b>✓ Do</b> Align the two 0 lines first. Then look along the scales for the next lines that meet exactly.</p>
         <p class="dont"><b>✗ Don't</b> Use a value from another microscope or from another objective lens.</p>
       </div>
-      <p>The picture shows two scales. The <button class="term" data-t="graticule">eyepiece graticule</button> (black, numbers above) is inside the eyepiece, so it stays still. Its divisions are <button class="term" data-t="epu">eyepiece units</button> (EPU). The <button class="term" data-t="micrometer">stage micrometer</button> (blue, numbers below) is on the stage and moves with it. Each of its divisions is 10 µm.</p>
+      <p>The picture shows two scales, with their names on it. The <button class="term" data-t="graticule">eyepiece graticule</button> (black, numbers above) is inside the eyepiece, so it stays still. Its divisions are <button class="term" data-t="epu">eyepiece units</button> (EPU). The <button class="term" data-t="micrometer">stage micrometer</button> (blue, numbers below) is a slide on the <button class="term" data-t="stage">stage</button>, and it moves with the stage. Each of its divisions is 10 µm.</p>
+      <p class="note">Why not a normal ruler? Its smallest marks are 1 mm apart, and at ×400 the whole circle you see is less than half a millimetre across.</p>
       <ol class="howto">
         <li>Focus on the stage micrometer at ×400 (the ×40 <button class="term" data-t="objective">objective lens</button>).</li>
-        <li>Move the stage micrometer (drag it, or use the arrows under the picture) until one of its lines sits exactly on 0 of the graticule.</li>
-        <li>Look along the scales for the next place where a black line and a blue line meet exactly. Drag the orange lens frame there: the lens shows that place four times larger.</li>
+        <li>Drag the blue scale (the stage micrometer), or use the Stage micrometer arrows under the picture, until one of its lines sits exactly on 0 of the black scale.</li>
+        <li>Drag the <b class="orange">orange frame</b> along the scales, or use the Lens arrows. The lens under the scales shows what is inside the frame four times larger. Find the next place where a black line and a blue line meet exactly, in one straight line. Near 0 some lines nearly meet: they do not count, so keep looking.</li>
         <li>Count the eyepiece units and the micrometer divisions from 0 to that place.</li>
       </ol>
       <p class="formula">1 eyepiece unit = (number of micrometer divisions × 10 µm) ÷ number of eyepiece units</p>
@@ -100,11 +101,11 @@
     <!-- 2 ------------------------------------------------------------------ -->
     <section class="part" id="part-2" role="tabpanel" aria-labelledby="tab-2" data-mode="slide" data-pin>
       <h2>Measure cells with the graticule</h2>
-      <p class="sub">About 3 minutes. The stage micrometer is gone, and cheek cells stained with <button class="term" data-t="stain">methylene blue</button> are on the stage. The graticule is still in the eyepiece, so at ×400 one eyepiece unit is still 2.35 µm.</p>
+      <p class="sub">About 3 minutes. The stage micrometer is gone, and cheek cells stained with <button class="term" data-t="stain">methylene blue</button> are on the stage. The <button class="term" data-t="graticule">graticule</button> is still in the eyepiece, so at ×400 one <button class="term" data-t="epu">eyepiece unit</button> is still 2.35 µm.</p>
       <div class="task"><div><span class="task__k">Your task</span><p>Measure cells A, B and C along their longest axis, in eyepiece units. Change each length to µm, then calculate the mean.</p></div><span class="task__n" aria-live="polite"></span></div>
       <div class="ins">
         <p class="kr"><b>★ Key rule</b> Length in µm = number of eyepiece units × the length of one eyepiece unit.</p>
-        <p class="do"><b>✓ Do</b> Measure at least three cells and calculate a mean.</p>
+        <p class="do"><b>✓ Do</b> Measure at least three cells and calculate a <button class="term" data-t="mean">mean</button>.</p>
         <p class="dont"><b>✗ Don't</b> Use your ×400 calibration at ×100: calibrate each objective.</p>
       </div>
       <p>Drag the slide to move a cell onto the scale. Use ⟲ and ⟳ under the picture to turn the eyepiece. Count the eyepiece units from one edge of the cell to the other.</p>
@@ -121,7 +122,7 @@
       <p class="sub">About 4 minutes. A micrograph in an exam often has a <button class="term" data-t="scalebar">scale bar</button>. You measure lengths on the page with a ruler, in mm, then calculate.</p>
       <div class="task"><div><span class="task__k">Your task</span><p>Use the ruler on the picture: measure the scale bar and the Paramecium. Calculate the magnification and the actual length. Then calculate a scale bar for your own drawing.</p></div><span class="task__n" aria-live="polite"></span></div>
       <div class="ins">
-        <p class="kr"><b>★ Key rule</b> <button class="term" data-t="magnification">Magnification</button> = image size ÷ <button class="term" data-t="actual">actual size</button>, both in the same unit.</p>
+        <p class="kr"><b>★ Key rule</b> <button class="term" data-t="magnification">Magnification</button> = <button class="term" data-t="image">image size</button> ÷ <button class="term" data-t="actual">actual size</button>, both in the same unit.</p>
         <p class="do"><b>✓ Do</b> Change mm to µm first (× 1000). Show your working, and give the unit.</p>
         <p class="dont"><b>✗ Don't</b> Divide a length in mm by a length in µm.</p>
       </div>
@@ -136,10 +137,10 @@
     <!-- 4 ------------------------------------------------------------------ -->
     <section class="part" id="part-4" role="tabpanel" aria-labelledby="tab-4" data-mode="draw" data-pin>
       <h2>What is wrong with these drawings?</h2>
-      <p class="sub">About 3 minutes. Your drawing is marked on a short list of rules: SOLD (Size, Outline, Labels, Detail), and a scale. Recall them, then find the mistakes in three drawings.</p>
+      <p class="sub">About 3 minutes. A good biological drawing follows a short list of rules: <b>SOLD</b> (<b>S</b>ize, <b>O</b>utline, <b>L</b>abels, <b>D</b>etail), and a scale. Recall them, then find the mistakes in three drawings.</p>
       <div class="task"><div><span class="task__k">Your task</span><p>Recall the rules from memory. Then type the three mistakes in each of drawings A, B and C.</p></div><span class="task__n" aria-live="polite"></span></div>
       <div class="ins">
-        <p class="kr"><b>★ Key rule</b> No scale, no size: without a scale bar, nobody can tell how large the cells really are.</p>
+        <p class="kr"><b>★ Key rule</b> No scale, no size: without a <button class="term" data-t="scalebar">scale bar</button>, nobody can tell how large the cells really are.</p>
         <p class="do"><b>✓ Do</b> Recall the rules first; then check each drawing against them. Drawing D follows every rule.</p>
         <p class="dont"><b>✗ Don't</b> Copy a drawing from a book or a photo: draw the cells on your own slide.</p>
       </div>
@@ -152,45 +153,39 @@
 
     <!-- 5 ------------------------------------------------------------------ -->
     <section class="part" id="part-5" role="tabpanel" aria-labelledby="tab-5" data-mode="phone">
-      <h2>Your photo, and how your work is marked</h2>
-      <p class="sub">About 1 minute. Read this before your practical lesson.</p>
+      <h2>Take a photo through the eyepiece</h2>
+      <p class="sub">About 1 minute. A photo keeps what you saw, with the scale beside it.</p>
       <div class="logi">
-        <p class="logi__k">Take the photo through the eyepiece</p>
+        <p class="logi__k">Step by step</p>
         <ol>
           <li>Focus on your cells at ×400, with the graticule scale across one cell.</li>
-          <li>Hold the phone's camera lens close to the eyepiece, in the middle.</li>
+          <li>Hold the phone's camera lens close to the <button class="term" data-t="eyepiece">eyepiece</button>, in the middle.</li>
           <li>Move the phone slowly until the circle of light fills the middle of the screen.</li>
           <li>Tap the cells on the screen to focus. Do not use the zoom.</li>
           <li>Check the photo: the cells and the scale must both be sharp.</li>
         </ol>
-        <p class="logi__k">What your work is marked on: 15 marks</p>
-        <ul>
-          <li><b>Your drawing (5):</b> its size, continuous lines, no shading, at least four labelled structures, and the size of the cell from your graticule.</li>
-          <li><b>Your photo and technique (5):</b> the cell you choose, the staining (not too light, not too dark), how you use the microscope, stage micrometer and graticule, safety, and how you handle the equipment.</li>
-          <li><b>Two exam questions (5):</b> magnification and actual size, with your working and units.</li>
-        </ul>
         <p class="logi__k">Safety</p>
         <p>Carry a microscope with two hands. Hold slides and cover slips by their edges. Tell your teacher about broken glass at once.</p>
       </div>
       <div data-qc="p5-qc-1"></div>
-      <p class="note">That is all. In your practical lesson you use your own specimens and calibrate your own microscope.</p>
+      <p class="note">That is all. Whenever you use a microscope, calibrate it yourself: every microscope and every objective lens has its own value.</p>
     </section>
   </main>
 </div>
 
 <footer>
   Something wrong, or a suggestion? Please contact me: <a href="mailto:dmompelriera@nlcsjeju.kr">dmompelriera@nlcsjeju.kr</a>.<br>
-  Checked against the IB Biology guide (first assessment 2025): A2.2.2 Microscopy skills; Tool 1 (a light microscope and eyepiece graticule) and Tool 3 (actual size from a micrograph with a scale bar). Textbook: Allott and Mindorff, Oxford IB Biology Course Companion (2023), pp. 50–55.<br>
+  Checked against the IB Biology guide (2025): A2.2.2 Microscopy skills; Tool 1 (a light microscope and eyepiece graticule) and Tool 3 (actual size from a micrograph with a scale bar). Textbook: Allott and Mindorff, Oxford IB Biology Course Companion (2023), pp. 50–55.<br>
   Every picture on this page is drawn for it: the views down the microscope, the cells at their real sizes, the micrograph and the drawings.<br>
   Code: AGPL-3.0 · Teaching material: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> — free for teaching, not for selling.
 </footer>
 
 <script src="https://accounts.google.com/gsi/client?hl=en-GB" async defer></script>
-<script src="js/config.js?v=1"></script>
-<script src="js/signin.js?v=1"></script>
-<script src="js/lesson.js?v=1"></script>
-<script src="js/scope.js?v=1"></script>
-<script src="js/app.js?v=1"></script>
-<script src="js/practice.js?v=1"></script>
+<script src="js/config.js?v=3"></script>
+<script src="js/signin.js?v=3"></script>
+<script src="js/lesson.js?v=3"></script>
+<script src="js/scope.js?v=3"></script>
+<script src="js/app.js?v=3"></script>
+<script src="js/practice.js?v=3"></script>
 </body>
 </html>

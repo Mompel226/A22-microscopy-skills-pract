@@ -22,7 +22,8 @@ the top, with the picture on the left (up to 56 % of the width on a computer) sh
    mistake.
 4. **Drawings.** The rules recalled from memory (SOLD: Size, Outline, Labels, Detail, and a scale; each box shows the first
    letter of its word), then three mistakes
-   typed for each of three drawings. Drawing D follows every rule.
+   typed for each of three drawings (each mistake is found by its own words, in any wording, with a letter or two of
+   misspelling allowed). Drawing D follows every rule.
 5. **The photo.** How to take a photo through the eyepiece with a phone (the eyepiece is labelled on the picture), and
    safety, with one quick check.
 

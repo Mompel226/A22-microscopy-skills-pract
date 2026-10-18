@@ -98,16 +98,16 @@
     },
     after: 'These rules make a drawing clear, accurate and easy to read.'
   });
-  const F = {
-    shading: { re: [/shad|hatch|colou?r(ed)? in|filled in|darkened/], show: 'shading' },
-    sketchy: { re: [/sketch|broken|not continuous|discontinu|\bgaps?\b|double|many lines|several lines|hairy|messy|rough|not one line|not clear|overlapp/], show: 'sketchy lines with gaps (not one continuous line)' },
-    arrow: { re: [/arrow/], show: 'an arrowhead on a label line' },
-    small: { re: [/small|tiny|size|space|half|not large|bigger|larger/], show: 'the drawing is too small (less than half the space)' },
-    cross: { re: [/cross/], show: 'label lines cross' },
-    inside: { re: [/inside|on the drawing|in the drawing|within|on top|written on|no (label )?line|without (a )?line|not outside/], show: 'a label is written on the drawing, with no label line' },
-    scale: { re: [/scale|magnification|no size|actual size|real size/], show: 'no scale bar (and no magnification)' },
-    touch: { re: [/touch|short|reach|stops?\b|gap|not (meet|reaching|meeting)|end(s)? before/], show: 'a label line does not touch its structure' },
-    unseen: { re: [/cannot be seen|can't be seen|cant be seen|not (be )?seen|not visible|invisible|ribosome|too small|electron|only what|light microscope|cannot see|can't see/], show: 'ribosomes cannot be seen with a light microscope (label only what you see)' }
+  const F = {   // re: the words that name each mistake; keys: words also found when a letter or two is misspelt (app.js faultHit)
+    shading: { re: [/shad|hatch|colou?r|filled|fill(ed)? in|darken|strip|diagonal lines|pattern|textur|lines (inside|across|in) the cell|scribbl(ed|ing) in/], keys: ['shading', 'shaded', 'hatching', 'coloured', 'colored'], show: 'shading' },
+    sketchy: { re: [/sketch|broken|contin[uo]|\bgaps?\b|double|many lines|several lines|multiple lines|more than one line|repeat|hairy|feather|fuzzy|messy|untidy|rough|wobbl|jagged|scribbl|dotted|dashed|patchy|not joined|unjoined|not connected|incomplete|not one line|not clear|not smooth|not neat|overlapp|thick and thin|outline/], keys: ['sketchy', 'continuous', 'discontinuous', 'broken', 'dotted', 'dashed'], show: 'sketchy lines with gaps (not one continuous line)' },
+    arrow: { re: [/arrow|arow|pointer|pointed end|head on/], keys: ['arrow', 'arrowhead', 'arrows'], show: 'an arrowhead on a label line' },
+    small: { re: [/small|tiny|size|space|half|not large|bigger|larger|large|too little|fill|mini|big/], keys: ['small', 'smaller', 'larger', 'bigger'], show: 'the drawing is too small (less than half the space)' },
+    cross: { re: [/cross|intersect|overlap|tangl|criss|meet each other|touch each other|lines meet/], keys: ['cross', 'crossing', 'crosses', 'intersect', 'overlap'], show: 'label lines cross' },
+    inside: { re: [/inside|on the drawing|in the drawing|within|on top|written on|writ(ten|ing) in|no (label )?line|without (a )?(label )?line|not outside|in the cell|on the cell|text on|words on|over the drawing/], keys: ['inside', 'within'], show: 'a label is written on the drawing, with no label line' },
+    scale: { re: [/scale|magnification|no size|actual size|real size|how big|measure|micromet|µm|\bum\b|\bbar\b/], keys: ['scale', 'magnification', 'measurement'], show: 'no scale bar (and no magnification)' },
+    touch: { re: [/touch|short|reach|stops?\b|gap|not (meet|reaching|meeting|connected|joined)|end(s)? before|miss|far from|away from|(doesn'?t|does not|not) (go|get|point) to|not on the/], keys: ['touch', 'touches', 'touching', 'reaching'], show: 'a label line does not touch its structure' },
+    unseen: { re: [/cannot be seen|can'?t be seen|cant be seen|not (be )?seen|not visible|invisible|ribosome|too small to (be )?(see|seen)|electron|only what|light microscope|cannot see|can'?t see|imagin|made up|not there|invent|not observ|guess|from a book|copied/], keys: ['ribosome', 'ribosomes', 'invisible', 'electron'], show: 'ribosomes cannot be seen with a light microscope (label only what you see)' }
   };
   [['A', ['shading', 'sketchy', 'arrow']], ['B', ['small', 'cross', 'inside']], ['C', ['scale', 'touch', 'unseen']]].forEach(([d, fs]) => {
     A.gset($(`[data-gs="p4-${d.toLowerCase()}"]`), {

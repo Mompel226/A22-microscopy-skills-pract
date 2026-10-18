@@ -251,6 +251,28 @@
     if (s0) { inp.value = s0.v || ''; wrong = s0.wrong || 0; if (s0.st === 'r') inp.classList.add('right'); else if (s0.st === 'w') inp.classList.add('wrong'); if (s0.shown) showAns(); else if (s0.ok) sayRight(); else if (wrong) sayWrong(); }
   }
 
+  /* A typed mistake counts when one of its patterns is in the answer, also with the spaces taken out ("dis-continuous"),
+     or when one of its key words is there with a letter wrong (two in a long word): "discontinous", "shadding", "arow".
+     Daniel, 18 Oct 2026: "discontinuous line … is basically the same. So it's correct … enlarge the number of
+     possibilities, and still make it that you type." */
+  function lev(a, b) {
+    const d = Array.from({ length: b.length + 1 }, (_, j) => j);
+    for (let i = 1; i <= a.length; i++) {
+      let prev = d[0]; d[0] = i;
+      for (let j = 1; j <= b.length; j++) { const t = d[j]; d[j] = Math.min(d[j] + 1, d[j - 1] + 1, prev + (a[i - 1] === b[j - 1] ? 0 : 1)); prev = t; }
+    }
+    return d[b.length];
+  }
+  function nearWord(key, t) {   // key somewhere in a typed word, at most 1 letter off (2 for a key of 9 letters or more)
+    const e = key.length >= 9 ? 2 : 1;
+    return t.split(/[^a-z]+/).some(w => {
+      for (let i = 0; i <= w.length - (key.length - e); i++)
+        for (let L = key.length - e; L <= key.length + e && i + L <= w.length; L++) if (lev(w.slice(i, i + L), key) <= e) return true;
+      return false;
+    });
+  }
+  const faultHit = (f, t) => f.re.some(r => r.test(t) || r.test(t.replace(/ /g, ''))) || (f.keys || []).some(k => nearWord(k, t));
+
   /* ---------------- a set of typed gaps, checked together ----------------
      cfg.gaps: { key: { ok(value, values) → right?, show() → the answer to show } }; or cfg.faults: a set of mistakes
      typed in any order, each found by its own words (re). The answers can be shown only after two complete tries. */
@@ -266,7 +288,7 @@
       const v = vals(), res = {};
       if (cfg.faults) {
         const used = new Set();
-        inputs().forEach(i => { const t = norm(i.value); const k = cfg.faults.findIndex((f, n) => !used.has(n) && f.re.some(r => r.test(t))); if (k >= 0) used.add(k); res[i.dataset.g] = k >= 0; });
+        inputs().forEach(i => { const t = norm(i.value); const k = cfg.faults.findIndex((f, n) => !used.has(n) && faultHit(f, t)); if (k >= 0) used.add(k); res[i.dataset.g] = k >= 0; });
       } else inputs().forEach(i => { const g = cfg.gaps[i.dataset.g]; res[i.dataset.g] = !!(g && g.ok(i.value.trim(), v)); });
       return res;
     }
@@ -274,7 +296,7 @@
     function giveAns() {
       if (cfg.faults) {
         const res = mark(), found = new Set();
-        inputs().forEach(i => { if (res[i.dataset.g]) { const t = norm(i.value); const k = cfg.faults.findIndex((f, n) => !found.has(n) && f.re.some(r => r.test(t))); if (k >= 0) found.add(k); } });
+        inputs().forEach(i => { if (res[i.dataset.g]) { const t = norm(i.value); const k = cfg.faults.findIndex((f, n) => !found.has(n) && faultHit(f, t)); if (k >= 0) found.add(k); } });
         const missed = cfg.faults.filter((_, n) => !found.has(n)).map(f => f.show);
         let note = $('.ans-list', box); if (!note) { note = h('p', { class: 'ans-list' }); out.insertAdjacentElement('beforebegin', note); }
         note.innerHTML = '<b>The mistakes you have not named:</b> ' + missed.join('; ') + '.';

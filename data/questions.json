@@ -1,0 +1,208 @@
+{
+ "id": "A22-microscopy-skills-pract",
+ "v": 1,
+ "parts": [
+  {
+   "n": 1,
+   "title": "Calibrate the graticule"
+  },
+  {
+   "n": 2,
+   "title": "Measure cells"
+  },
+  {
+   "n": 3,
+   "title": "Scale bars"
+  },
+  {
+   "n": 4,
+   "title": "Drawings"
+  },
+  {
+   "n": 5,
+   "title": "Your photo and marks"
+  }
+ ],
+ "groups": [],
+ "questions": [
+  {
+   "id": "p1-cal",
+   "part": 1,
+   "title": "Calibrate the graticule at ×400",
+   "short": "Cal",
+   "kind": "gaps",
+   "gaps": [
+    "EPU",
+    "divisions",
+    "µm per EPU"
+   ]
+  },
+  {
+   "id": "p1-qc-1",
+   "part": 1,
+   "title": "One eyepiece unit at ×100",
+   "short": "q1",
+   "kind": "num"
+  },
+  {
+   "id": "p1-qc-2",
+   "part": 1,
+   "title": "Why calibrate for each objective?",
+   "short": "q2",
+   "kind": "mcq",
+   "opts": [
+    "The graticule is in the eyepiece, so it looks the same at every objective, while the slide is magnified more or less.",
+    "The stage micrometer is in the eyepiece, so its divisions change with the objective, while the graticule stays the same size.",
+    "A stronger objective makes the divisions of the graticule shrink, so each one stands for a longer length on the slide.",
+    "Each objective lens changes the focus of the eyepiece, so the graticule moves away from its 0 line after every change."
+   ]
+  },
+  {
+   "id": "p2-measure",
+   "part": 2,
+   "title": "Measure three cheek cells",
+   "short": "Cells",
+   "kind": "gaps",
+   "gaps": [
+    "A EPU",
+    "A µm",
+    "B EPU",
+    "B µm",
+    "C EPU",
+    "C µm",
+    "mean"
+   ]
+  },
+  {
+   "id": "p2-qc-1",
+   "part": 2,
+   "title": "A cell at an angle to the scale",
+   "short": "q1",
+   "kind": "mcq",
+   "opts": [
+    "Turn the eyepiece until the scale lies along the longest axis, then count the units from one edge to the other.",
+    "Count the units straight across the cell as it lies, then add the angle between the cell and the scale to the answer.",
+    "Change to the ×10 objective, so that the cell becomes small enough to lie along the scale at any angle you choose.",
+    "Measure the cell with a ruler held against the slide, because the scale only works for cells that already lie along it."
+   ]
+  },
+  {
+   "id": "p2-qc-2",
+   "part": 2,
+   "title": "A row of leaf cells",
+   "short": "q2",
+   "kind": "num"
+  },
+  {
+   "id": "p3-bar",
+   "part": 3,
+   "title": "Magnification and actual size from a scale bar",
+   "short": "Bar",
+   "kind": "gaps",
+   "gaps": [
+    "bar mm",
+    "magnification",
+    "length mm",
+    "actual µm"
+   ]
+  },
+  {
+   "id": "p3-draw",
+   "part": 3,
+   "title": "A scale bar for your own drawing",
+   "short": "Own",
+   "kind": "gaps",
+   "gaps": [
+    "magnification",
+    "bar mm"
+   ]
+  },
+  {
+   "id": "p3-qc-1",
+   "part": 3,
+   "title": "Actual size in an electron micrograph",
+   "short": "q1",
+   "kind": "num"
+  },
+  {
+   "id": "p3-qc-2",
+   "part": 3,
+   "title": "A mistake with units",
+   "short": "q2",
+   "kind": "mcq",
+   "opts": [
+    "The two lengths are in different units: 25 mm is 25 000 µm, so the magnification is 25 000 ÷ 10 = ×2500.",
+    "The division is the wrong way round: magnification = 10 ÷ 25 = ×0.4, because the scale bar is the smaller length.",
+    "Nothing went wrong: a magnification is always the length of the scale bar divided by the number written beside it.",
+    "The scale bar must be measured in centimetres, so the magnification is 2.5 ÷ 10 = ×0.25, which is smaller again."
+   ]
+  },
+  {
+   "id": "p4-rules",
+   "part": 4,
+   "title": "Recall the rules for a drawing",
+   "short": "Rules",
+   "kind": "gaps",
+   "gaps": [
+    "half",
+    "continuous",
+    "shading",
+    "ruler",
+    "touch",
+    "cross",
+    "four",
+    "see",
+    "graticule"
+   ]
+  },
+  {
+   "id": "p4-a",
+   "part": 4,
+   "title": "Three mistakes in drawing A",
+   "short": "A",
+   "kind": "gaps",
+   "gaps": [
+    "mistake 1",
+    "mistake 2",
+    "mistake 3"
+   ]
+  },
+  {
+   "id": "p4-b",
+   "part": 4,
+   "title": "Three mistakes in drawing B",
+   "short": "B",
+   "kind": "gaps",
+   "gaps": [
+    "mistake 1",
+    "mistake 2",
+    "mistake 3"
+   ]
+  },
+  {
+   "id": "p4-c",
+   "part": 4,
+   "title": "Three mistakes in drawing C",
+   "short": "C",
+   "kind": "gaps",
+   "gaps": [
+    "mistake 1",
+    "mistake 2",
+    "mistake 3"
+   ]
+  },
+  {
+   "id": "p5-qc-1",
+   "part": 5,
+   "title": "A photo with no scale in it",
+   "short": "q1",
+   "kind": "mcq",
+   "opts": [
+    "Your measurement of the cell’s size, because nothing in the photo shows the scale you used.",
+    "Your choice of cell, because a photo cannot show which of the cells on the slide you chose to draw.",
+    "Your staining, because the colour of a stain always changes when a phone takes a photo of it.",
+    "The labels of your drawing, because the structures in a photo have no names written beside them."
+   ]
+  }
+ ]
+}

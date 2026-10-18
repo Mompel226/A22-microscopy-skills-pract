@@ -24,8 +24,8 @@ the top, with the picture on the left (up to 56 % of the width on a computer) sh
    letter of its word), then three mistakes
    typed for each of three drawings (each mistake is found by its own words, in any wording, with a letter or two of
    misspelling allowed). Drawing D follows every rule.
-5. **The photo.** How to take a photo through the eyepiece with a phone (the eyepiece is labelled on the picture), and
-   safety, with one quick check.
+5. **The photo.** How to take a photo through the eyepiece with a phone (the eyepiece is labelled on the picture; the
+   phone's screen starts out of focus, and a click on the cells focuses it there), and safety, with one quick check.
 
 The practice specimens are human cheek cells (no longer done in the school lab, for health and safety) and a leaf
 epidermis peel with guard cells (done in Year 8 and Year 11).

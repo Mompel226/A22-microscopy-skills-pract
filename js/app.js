@@ -108,8 +108,10 @@
     calib: Object.assign({ obj: 40, x0: 101.7, lens: 101 }, store.get('v.calib', {})),
     slide: Object.assign({ slide: 'cheek', dx: 0, dy: 0, rot: 0 }, store.get('v.slide', {})),
     card: Object.assign({ rx: 64, ry: 506, rot: 0 }, store.get('v.card', {})),
-    draw: Object.assign({ d: 'A' }, store.get('v.draw', {}))
+    draw: Object.assign({ d: 'A' }, store.get('v.draw', {})),
+    phone: { focused: false }                                  // not kept: each visit starts out of focus
   };
+  let phoneMsg = '';
   const svg = $('#view'), stat = $('#vstat');
   let mode = 'calib';
   const CAP = {
@@ -119,7 +121,7 @@
     draw: 'Drawings made for this page. A, B and C each break three rules; D follows every rule.',
     phone: 'Taking a photo through the eyepiece with a phone.'
   };
-  const LABEL = { calib: 'The eyepiece graticule over the stage micrometer, with a lens that shows the orange frame four times larger', slide: 'A slide under the microscope with the eyepiece graticule', card: 'A printed micrograph of a Paramecium with a scale bar and a ruler', draw: 'A student drawing', phone: 'A phone held to the eyepiece of a microscope' };
+  const LABEL = { calib: 'The eyepiece graticule over the stage micrometer, with a lens that shows the orange frame four times larger', slide: 'A slide under the microscope with the eyepiece graticule', card: 'A printed micrograph of a Paramecium with a scale bar and a ruler', draw: 'A student drawing', phone: 'A phone held to the eyepiece of a microscope; click the cells on its screen to focus' };
   const d10 = () => 10 * S.sc(V.calib.obj);                    // svg units per micrometer division
   function lined() { const d = d10(), j = Math.round((S.G.x0 - V.calib.x0) / d); return { j, off: V.calib.x0 + j * d - S.G.x0 }; }
   function render() {
@@ -127,7 +129,7 @@
     else if (mode === 'slide') svg.innerHTML = S.slide(V.slide);
     else if (mode === 'card') svg.innerHTML = S.card(V.card);
     else if (mode === 'draw') svg.innerHTML = S.DRAW[V.draw.d]();
-    else svg.innerHTML = S.phone();
+    else svg.innerHTML = S.phone(V.phone);
     svg.setAttribute('aria-label', LABEL[mode] + (mode === 'draw' ? ' (' + V.draw.d + ')' : ''));
     $$('.ctl').forEach(c => { c.hidden = c.dataset.for !== mode; });
     $$('[data-set]').forEach(b => { const [k, v] = b.dataset.set.split(':'); const st = { obj: V.calib, slide: V.slide, d: V.draw }[k]; if (st) b.setAttribute('aria-pressed', String(String(st[k]) === v)); });
@@ -139,12 +141,21 @@
       stat.innerHTML += ` The eyepiece is turned ${Math.round(((V.slide.rot % 360) + 360) % 360)}°. Drag the slide to move a cell onto the scale.`;
     } else if (mode === 'card') stat.innerHTML = 'Drag the ruler onto what you measure. Read from its 0 mark; 10 small divisions = 1 cm.';
     else if (mode === 'draw') stat.innerHTML = V.draw.d === 'D' ? 'Drawing D follows every rule. Compare A, B and C with it.' : `Drawing ${V.draw.d} breaks three rules. Type them in part 4.`;
-    else stat.textContent = '';
+    else stat.innerHTML = V.phone.focused ? '<span class="ok">✓ In focus: the cells and the graticule scale are both sharp.</span> This is the moment to take the photo.'
+      : (phoneMsg || 'The phone’s picture is blurred. Click (or tap) the cells on its screen to focus there, as you would on a real phone.');
     $('#cap').textContent = CAP[mode];
   }
   const save = () => { store.set('v.calib', V.calib); store.set('v.slide', V.slide); store.set('v.card', V.card); store.set('v.draw', V.draw); };
   const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
   function snapMic() { const l = lined(); if (Math.abs(l.off) < 1.6) V.calib.x0 -= l.off; }
+  /* Part 5: a click on the phone's screen focuses its camera where it lands, as a tap does on a real phone */
+  svg.addEventListener('click', e => {
+    if (mode !== 'phone') return;
+    const p = pt(e), P = S.PHONE;
+    if (Math.hypot(p.x - P.cx, p.y - P.cy) <= P.r) { V.phone = { focused: true, fx: p.x, fy: p.y }; phoneMsg = ''; }
+    else if (!V.phone.focused) phoneMsg = 'Tap the cells, inside the circle of light on the phone’s screen.';
+    render();
+  });
   /* dragging: the stage micrometer, the lens frame, the slide, the ruler */
   function pt(e) { const p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY; const m = svg.getScreenCTM(); return m ? p.matrixTransform(m.inverse()) : { x: 0, y: 0 }; }
   let drag = null;
@@ -183,6 +194,8 @@
     if (a === 'turn0') V.slide.rot = 0;
     if (a === 'ruler') { V.card.rx += Number(b.dataset.x || 0) * S.MM; V.card.ry += Number(b.dataset.y || 0) * S.MM; }
     if (a === 'rturn') V.card.rot = V.card.rot ? 0 : 90;
+    if (a === 'focus') { V.phone = { focused: true }; phoneMsg = ''; }
+    if (a === 'blur') { V.phone = { focused: false }; phoneMsg = ''; }
     save(); render();
   });
   svg.addEventListener('keydown', e => {

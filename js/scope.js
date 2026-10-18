@@ -350,16 +350,24 @@
   const DRAW = { A: drawingA, B: drawingB, C: drawingC, D: drawingD };
 
   /* ---------------- Part 5: the phone held at the eyepiece ---------------- */
-  function phone() {
+  /* Part 5: a phone held to the eyepiece. Its screen starts out of focus; a click (a tap) on the cells focuses where it
+     lands, as a phone camera does (Daniel, 18 Oct 2026: "it says tap the cells to focus … but it's not doing anything").
+     PHONE: the circle of light on the screen, in the picture's units (app.js tests a click against it). */
+  const PHONE = { cx: 300, cy: 286, r: 282 * 272 / 600 };
+  function phone(st) {
+    st = st || {};
     const inner = slide({ slide: 'cheek', dx: 30, dy: 10, rot: 0, bare: true }).replace('<rect width="600" height="600" fill="#0E1015"/>', '<rect width="600" height="600" fill="#05060A"/>');
-    return `<rect width="600" height="600" class="desk"/>
+    const sharp = !!st.focused;
+    return `<defs><filter id="pblur" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="3.2"/></filter></defs>
+      <rect width="600" height="600" class="desk"/>
       <circle cx="300" cy="318" r="196" class="eyepiece"/><circle cx="300" cy="318" r="170" class="eyepiece__in"/>
       <rect x="150" y="40" width="300" height="540" rx="38" class="phone"/><rect x="164" y="80" width="272" height="440" rx="12" fill="#05060A"/>
-      <svg x="164" y="150" width="272" height="272" viewBox="0 0 600 600">${inner}</svg>
-      <circle cx="300" cy="286" r="34" class="focus"/><text class="phone__t" x="300" y="470">Tap the cells to focus</text>
+      <g class="phone__screen" data-tap="phone"${sharp ? '' : ' filter="url(#pblur)"'}><svg x="164" y="150" width="272" height="272" viewBox="0 0 600 600">${inner}</svg></g>
+      ${sharp ? `<circle cx="${f2(st.fx || PHONE.cx)}" cy="${f2(st.fy || PHONE.cy)}" r="30" class="focus" pointer-events="none"/>` : ''}
+      <text class="phone__t" x="300" y="470">${sharp ? 'In focus: take the photo' : 'Tap the cells to focus'}</text>
       <circle cx="300" cy="60" r="5" class="phone__cam"/>
       <g class="plab"><line x1="88" y1="318" x2="118" y2="318"/><text x="84" y="324">eyepiece</text></g>`;
   }
 
-  window.Scope = { EPU, G, U, sc, LENS, onZero, calib, slide, card, DRAW, phone, cells: cells.map(c => ({ k: c.k, len: c.len, S: c.S })), PARA, MM, LEAF };
+  window.Scope = { EPU, G, U, sc, LENS, onZero, calib, slide, card, DRAW, phone, PHONE, cells: cells.map(c => ({ k: c.k, len: c.len, S: c.S })), PARA, MM, LEAF };
 })();

@@ -665,3 +665,6 @@ svg.view .vn{display:none}
 
 /* the first letter of a missing word, shown in its empty box (Recall the rules) */
 input.gapin::placeholder{color:var(--ink3);opacity:1;font-weight:600}
+
+/* Part 5: the phone's screen focuses where it is clicked */
+svg.view [data-tap]{cursor:pointer}

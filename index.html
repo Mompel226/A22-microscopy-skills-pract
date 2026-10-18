@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Spectral:ital,wght@0,600;1,400&display=swap">
-<link rel="stylesheet" href="css/app.css?v=7">
+<link rel="stylesheet" href="css/app.css?v=8">
 <!-- Bright or dark: the reader's choice for the whole site (biology.theme), else the computer's setting. -->
 <script>(function () { try { var t = localStorage.getItem('biology.theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {} })();</script>
 </head>
@@ -63,6 +63,9 @@
       </div>
       <div class="ctl" data-for="card" hidden>
         <span class="ctl__g"><span class="ctl__k">Ruler</span><button type="button" data-act="ruler" data-x="-1" aria-label="Move the ruler 1 mm to the left">◀</button><button type="button" data-act="ruler" data-x="1" aria-label="Move the ruler 1 mm to the right">▶</button><button type="button" data-act="ruler" data-y="-1" aria-label="Move the ruler 1 mm up">▲</button><button type="button" data-act="ruler" data-y="1" aria-label="Move the ruler 1 mm down">▼</button><button type="button" data-act="rturn">Turn 90°</button></span>
+      </div>
+      <div class="ctl" data-for="phone" hidden>
+        <span class="ctl__g"><span class="ctl__k">Phone</span><button type="button" data-act="focus">Focus on the cells</button><button type="button" data-act="blur">Out of focus again</button></span>
       </div>
       <div class="ctl" data-for="draw" hidden>
         <span class="ctl__g"><span class="ctl__k">Drawing</span><button type="button" data-set="d:A" aria-pressed="true">A</button><button type="button" data-set="d:B" aria-pressed="false">B</button><button type="button" data-set="d:C" aria-pressed="false">C</button><button type="button" data-set="d:D" aria-pressed="false">D ✓</button></span>
@@ -181,11 +184,11 @@
 </footer>
 
 <script src="https://accounts.google.com/gsi/client?hl=en-GB" async defer></script>
-<script src="js/config.js?v=7"></script>
-<script src="js/signin.js?v=7"></script>
-<script src="js/lesson.js?v=7"></script>
-<script src="js/scope.js?v=7"></script>
-<script src="js/app.js?v=7"></script>
-<script src="js/practice.js?v=7"></script>
+<script src="js/config.js?v=8"></script>
+<script src="js/signin.js?v=8"></script>
+<script src="js/lesson.js?v=8"></script>
+<script src="js/scope.js?v=8"></script>
+<script src="js/app.js?v=8"></script>
+<script src="js/practice.js?v=8"></script>
 </body>
 </html>

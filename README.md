@@ -1,4 +1,4 @@
-# Microscopy skills — IB Biology (A2.2.2)
+# IB Biology practical: microscopy skills (A2.2.2)
 
 ![Part 1: the eyepiece graticule and the stage micrometer, named on the picture, with the next step at its top and a lens four times larger](img/readme.jpg)
 

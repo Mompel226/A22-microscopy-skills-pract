@@ -51,7 +51,8 @@ a{color:var(--sea-ink)}
 .lesson__t{font-weight:600}
 .lesson__out{font:500 12.5px/1 var(--sans);color:var(--ink3);background:none;border:0;padding:0;text-decoration:underline;cursor:pointer}
 .lesson__msg{flex-basis:100%;color:var(--amber)}
-.lesson__g{display:inline-flex;min-height:32px;align-items:center}
+/* Google's frame is drawn in the light scheme: in the dark version, a frame whose scheme differs from its box's is painted on a white ground, so the button stood in a white box (29 Oct 2026). Its box takes the frame's own scheme. */
+.lesson__g{display:inline-flex;min-height:32px;align-items:center;color-scheme:normal}
 .upbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 8px}
 .upbtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 .themebtn{font:500 12.5px/1 var(--sans);color:var(--ink2);background:var(--surface);border:1px solid var(--rule);border-radius:100px;padding:7px 12px;cursor:pointer}

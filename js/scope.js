@@ -270,8 +270,6 @@
     `<rect x="46" y="62" width="508" height="490" class="dbox"/><text class="paper__t" x="46" y="50">${t}</text>`;
 
   function cellAt(len, ang, seed, cx, cy, k) { return cheekShape(len, ang, seed).map(([x, y]) => [cx + x * k, cy + y * k]); }
-  /* the point of an outline nearest to a given direction from its middle: where a label line must end */
-  function edgeToward(P, cx, cy, tx, ty) { let best = P[0], bd = Infinity; P.forEach(p => { const d = Math.abs(Math.atan2(p[1] - cy, p[0] - cx) - Math.atan2(ty - cy, tx - cx)); if (d < bd) { bd = d; best = p; } }); return best; }
 
   /* the outline point on the right-hand side of a cell nearest a height y: where a level label line meets it */
   function edgeAtY(P, y) { const cx = P.reduce((a, p) => a + p[0], 0) / P.length; let best = P[0], bd = Infinity; P.forEach(p => { if (p[0] < cx) return; const d = Math.abs(p[1] - y); if (d < bd) { bd = d; best = p; } }); return best; }
